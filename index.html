@@ -1,108 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Story</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>For You</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:white;
+    text-align:center;
 }
 
-body {
-    height: 100vh;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    overflow: hidden;
+.container{
+    background:rgba(255,255,255,0.08);
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+    width:90%;
+    max-width:400px;
 }
 
-.card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 50px 40px;
-    width: 90%;
-    max-width: 450px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    animation: fadeIn 1.5s ease forwards;
+input{
+    width:100%;
+    padding:12px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
 }
 
-h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 15px;
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    background:#00c6ff;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-.highlight {
-    background: linear-gradient(90deg, #ff758c, #ff7eb3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+button:hover{
+    background:#0072ff;
 }
 
-p {
-    font-weight: 300;
-    margin-bottom: 30px;
-    opacity: 0.85;
+.hidden{
+    display:none;
 }
 
-.button {
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    background: linear-gradient(90deg, #ff758c, #ff7eb3);
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s ease;
+.message{
+    animation:fade 1.5s ease-in-out;
 }
 
-.button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(255,118,140,0.5);
-}
-
-.message {
-    margin-top: 25px;
-    font-size: 16px;
-    opacity: 0;
-    transition: 0.5s ease;
-}
-
-.message.show {
-    opacity: 1;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-    <h1>Our <span class="highlight">Love Story</span></h1>
-    <p>Every moment with you feels like a new beginning.</p>
-    <button class="button" onclick="showMessage()">Discover More</button>
-    <div class="message" id="msg">
-        You are my favorite chapter in this life. ❤️
-    </div>
+<div class="container" id="loginBox">
+    <h2>Enter Password</h2>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkPassword()">Enter</button>
+</div>
+
+<div class="container hidden message" id="contentBox">
+    <h2>To The Most Important Person</h2>
+    <p>
+        You are not just a part of my life...  
+        You are my calm, my strength,  
+        and the reason I smile every day.
+    </p>
 </div>
 
 <script>
-function showMessage() {
-    document.getElementById("msg").classList.toggle("show");
+function checkPassword(){
+    var pass = document.getElementById("password").value;
+    if(pass === "1234"){
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("contentBox").classList.remove("hidden");
+    } else {
+        alert("Wrong Password");
+    }
 }
 </script>
 
