@@ -32,4 +32,56 @@ body{
   top:35%;
   width:100%;
   font-size:30px;
-  font
+  font-weight:bold;
+  line-height:1.8;
+  text-shadow:2px 2px 15px black;
+  padding:20px;
+}
+
+/* القلوب */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation:rise 6s linear forwards;
+}
+
+@keyframes rise{
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<video id="bgVideo" autoplay loop controls playsinline>
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="message">
+  كوتي 💖<br>
+  أنت مش بس جزء من حياتي،<br>
+  أنت راحتي وقوتي وسر ابتسامتي كل يوم.<br>
+  حتى في أصعب لحظات الحياة، بحس إنك جنبي وبتدعمني،<br>
+  كل كلمة منك بتلمس قلبي وكل ضحكة منك بتنور أيامي.<br>
+  بحبك اليوم وكل يوم أكتر من اللي فات.
+</div>
+
+<script>
+/* قلوب بتطير */
+setInterval(()=>{
+  const h = document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(20+Math.random()*20)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},500);
+</script>
+
+</body>
+</html>
