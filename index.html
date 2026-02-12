@@ -3,19 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You</title>
+<title>كوتي</title>
+
+<!-- الخط الاحترافي -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family:'Amiri', serif;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
     color:white;
     text-align:center;
+    overflow:hidden;
+}
+
+/* حركة الخلفية */
+@keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 .container{
@@ -26,6 +39,11 @@ body{
     box-shadow:0 0 30px rgba(0,0,0,0.5);
     width:90%;
     max-width:400px;
+    transition: transform 0.5s ease;
+}
+
+.container:hover{
+    transform: scale(1.02);
 }
 
 input{
@@ -59,42 +77,70 @@ button:hover{
     display:none;
 }
 
-.message{
-    animation:fade 1.5s ease-in-out;
+#contentBox p{
+    display:inline-block;
+    white-space:pre-wrap;
+    overflow:hidden;
+    border-right:2px solid #fff;
+    animation: typing 4s steps(50, end), blink 0.5s step-end infinite alternate;
 }
 
-@keyframes fade{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
+@keyframes typing{
+    from{width:0}
+    to{width:100%}
+}
+
+@keyframes blink{
+    50%{border-color: transparent;}
 }
 </style>
 </head>
 
 <body>
 
+<!-- صفحة الدخول -->
 <div class="container" id="loginBox">
-    <h2>Enter Password</h2>
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkPassword()">Enter</button>
+    <h2>أدخلي الباسورد</h2>
+    <input type="password" id="password" placeholder="الباسورد">
+    <button onclick="checkPassword()">دخول</button>
 </div>
 
-<div class="container hidden message" id="contentBox">
-    <h2>To The Most Important Person</h2>
+<!-- المحتوى بعد الدخول -->
+<div class="container hidden" id="contentBox">
+    <h2>كوتي 💖</h2>
     <p>
-        You are not just a part of my life...  
-        You are my calm, my strength,  
-        and the reason I smile every day.
+أنت مش بس جزء من حياتي،  
+أنت راحتي، قوتي،  
+وسبب ابتسامتي كل يوم.
     </p>
+    <br><br>
+    <button onclick="toggleMusic()" id="musicBtn">إيقاف/تشغيل الموسيقى</button>
 </div>
+
+<!-- الموسيقى التلقائية -->
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  متصفحك لا يدعم الموسيقى
+</audio>
 
 <script>
 function checkPassword(){
     var pass = document.getElementById("password").value;
-    if(pass === "1234"){
+    if(pass === "277"){
         document.getElementById("loginBox").classList.add("hidden");
         document.getElementById("contentBox").classList.remove("hidden");
+        document.getElementById("bgMusic").play();
     } else {
-        alert("Wrong Password");
+        alert("الباسورد غير صحيح");
+    }
+}
+
+function toggleMusic(){
+    var music = document.getElementById("bgMusic");
+    if(music.paused){
+        music.play();
+    } else {
+        music.pause();
     }
 }
 </script>
