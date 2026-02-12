@@ -71,6 +71,25 @@ button:hover{
     font-size:18px;
     line-height:1.6;
 }
+
+.video-container{
+    position:relative;
+    padding-bottom:56.25%;
+    height:0;
+    overflow:hidden;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+.video-container iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:none;
+    transform: scaleX(1); /* الفيديو يظهر بشكل صحيح */
+}
 </style>
 </head>
 
@@ -93,13 +112,13 @@ button:hover{
         <p>بحبك اليوم وكل يوم أكتر من اللي فات.</p>
     </div>
 
-    <!-- مشغل الصوت -->
-    <audio id="loveSong" autoplay>
-      <source src="magid_part.mp3" type="audio/mpeg">
-      المتصفح لا يدعم الصوت.
-    </audio>
+    <div class="video-container">
+        <iframe id="ytplayer"
+        src="https://www.youtube.com/embed/Z8ifuGix1wc?start=50&autoplay=1&controls=1&rel=0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
     <br>
-    <button onclick="toggleMusic()">إيقاف / تشغيل الصوت</button>
+    <button onclick="toggleVideo()">إيقاف / تشغيل الفيديو</button>
 </div>
 
 <script>
@@ -114,10 +133,14 @@ function checkPassword(){
     }
 }
 
-function toggleMusic(){
-    var song = document.getElementById("loveSong");
-    if(song.paused) song.play();
-    else song.pause();
+function toggleVideo(){
+    var iframe = document.getElementById("ytplayer");
+    var src = iframe.src;
+    if(src.includes("autoplay=1")){
+        iframe.src = src.replace("autoplay=1","autoplay=0");
+    }else{
+        iframe.src = src.replace("autoplay=0","autoplay=1");
+    }
 }
 
 // ظهور الرسالة سطر سطر
