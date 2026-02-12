@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>كوتي</title>
 
-<!-- الخط الاحترافي -->
 <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 
 <style>
@@ -21,10 +20,8 @@ body{
     height:100vh;
     color:white;
     text-align:center;
-    overflow:hidden;
 }
 
-/* حركة الخلفية */
 @keyframes gradientBG {
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
@@ -38,7 +35,7 @@ body{
     backdrop-filter:blur(10px);
     box-shadow:0 0 30px rgba(0,0,0,0.5);
     width:90%;
-    max-width:400px;
+    max-width:500px;
     transition: transform 0.5s ease;
 }
 
@@ -46,25 +43,23 @@ body{
     transform: scale(1.02);
 }
 
-input{
-    width:100%;
-    padding:12px;
-    margin-top:20px;
-    border:none;
-    border-radius:10px;
-    outline:none;
-    font-size:16px;
+.hidden{
+    display:none;
 }
 
-button{
+input, button{
     width:100%;
     padding:12px;
     margin-top:15px;
     border:none;
     border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+button{
     background:#00c6ff;
     color:white;
-    font-size:16px;
     cursor:pointer;
     transition:0.3s;
 }
@@ -73,16 +68,11 @@ button:hover{
     background:#0072ff;
 }
 
-.hidden{
-    display:none;
-}
-
-#contentBox p{
-    display:inline-block;
+#message p{
     white-space:pre-wrap;
     overflow:hidden;
     border-right:2px solid #fff;
-    animation: typing 4s steps(50, end), blink 0.5s step-end infinite alternate;
+    animation: typing 8s steps(120, end), blink 0.5s step-end infinite alternate;
 }
 
 @keyframes typing{
@@ -93,35 +83,55 @@ button:hover{
 @keyframes blink{
     50%{border-color: transparent;}
 }
+
+.video-container{
+    position:relative;
+    padding-bottom:56.25%;
+    height:0;
+    overflow:hidden;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+.video-container iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:none;
+}
 </style>
 </head>
 
 <body>
 
-<!-- صفحة الدخول -->
 <div class="container" id="loginBox">
     <h2>أدخلي الباسورد</h2>
     <input type="password" id="password" placeholder="الباسورد">
     <button onclick="checkPassword()">دخول</button>
 </div>
 
-<!-- المحتوى بعد الدخول -->
 <div class="container hidden" id="contentBox">
     <h2>كوتي 💖</h2>
-    <p>
+    <div id="message">
+        <p>
+كوتي 💖  
 أنت مش بس جزء من حياتي،  
-أنت راحتي، قوتي،  
-وسبب ابتسامتي كل يوم.
-    </p>
-    <br><br>
-    <button onclick="toggleMusic()" id="musicBtn">إيقاف/تشغيل الموسيقى</button>
+أنت راحتي وقوتي وسر ابتسامتي كل يوم.  
+حتى في أصعب لحظات الحياة، بحس إنك جنبي وبتدعمني،  
+كل كلمة منك بتلمس قلبي وكل ضحكة منك بتنور أيامي.  
+بحبك اليوم وكل يوم أكتر من اللي فات.
+        </p>
+    </div>
+    <div class="video-container">
+        <iframe id="ytplayer"
+        src="https://www.youtube.com/embed/Z8ifuGix1wc?start=50&autoplay=1&controls=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <br>
+    <button onclick="toggleVideo()">إيقاف / تشغيل الفيديو</button>
 </div>
-
-<!-- الموسيقى التلقائية -->
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  متصفحك لا يدعم الموسيقى
-</audio>
 
 <script>
 function checkPassword(){
@@ -129,18 +139,18 @@ function checkPassword(){
     if(pass === "277"){
         document.getElementById("loginBox").classList.add("hidden");
         document.getElementById("contentBox").classList.remove("hidden");
-        document.getElementById("bgMusic").play();
     } else {
         alert("الباسورد غير صحيح");
     }
 }
 
-function toggleMusic(){
-    var music = document.getElementById("bgMusic");
-    if(music.paused){
-        music.play();
-    } else {
-        music.pause();
+function toggleVideo(){
+    var iframe = document.getElementById("ytplayer");
+    var src = iframe.src;
+    if(src.includes("autoplay=1")){
+        iframe.src = src.replace("autoplay=1","autoplay=0");
+    }else{
+        iframe.src = src.replace("autoplay=0","autoplay=1");
     }
 }
 </script>
