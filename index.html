@@ -36,11 +36,6 @@ body{
     box-shadow:0 0 30px rgba(0,0,0,0.5);
     width:90%;
     max-width:500px;
-    transition: transform 0.5s ease;
-}
-
-.container:hover{
-    transform: scale(1.02);
 }
 
 .hidden{
@@ -70,18 +65,11 @@ button:hover{
 
 #message p{
     white-space:pre-wrap;
-    overflow:hidden;
-    border-right:2px solid #fff;
-    animation: typing 8s steps(120, end), blink 0.5s step-end infinite alternate;
-}
-
-@keyframes typing{
-    from{width:0}
-    to{width:100%}
-}
-
-@keyframes blink{
-    50%{border-color: transparent;}
+    display:block;
+    opacity:0;
+    margin:10px 0;
+    font-size:18px;
+    line-height:1.6;
 }
 
 .video-container{
@@ -100,6 +88,7 @@ button:hover{
     width:100%;
     height:100%;
     border:none;
+    transform: scaleX(1); /* يظهر الفيديو صح */
 }
 </style>
 </head>
@@ -115,15 +104,14 @@ button:hover{
 <div class="container hidden" id="contentBox">
     <h2>كوتي 💖</h2>
     <div id="message">
-        <p>
-كوتي 💖  
-أنت مش بس جزء من حياتي،  
-أنت راحتي وقوتي وسر ابتسامتي كل يوم.  
-حتى في أصعب لحظات الحياة، بحس إنك جنبي وبتدعمني،  
-كل كلمة منك بتلمس قلبي وكل ضحكة منك بتنور أيامي.  
-بحبك اليوم وكل يوم أكتر من اللي فات.
-        </p>
+        <p>كوتي 💖</p>
+        <p>أنت مش بس جزء من حياتي،</p>
+        <p>أنت راحتي وقوتي وسر ابتسامتي كل يوم.</p>
+        <p>حتى في أصعب لحظات الحياة، بحس إنك جنبي وبتدعمني،</p>
+        <p>كل كلمة منك بتلمس قلبي وكل ضحكة منك بتنور أيامي.</p>
+        <p>بحبك اليوم وكل يوم أكتر من اللي فات.</p>
     </div>
+
     <div class="video-container">
         <iframe id="ytplayer"
         src="https://www.youtube.com/embed/Z8ifuGix1wc?start=50&autoplay=1&controls=1"
@@ -139,6 +127,7 @@ function checkPassword(){
     if(pass === "277"){
         document.getElementById("loginBox").classList.add("hidden");
         document.getElementById("contentBox").classList.remove("hidden");
+        showMessage();
     } else {
         alert("الباسورد غير صحيح");
     }
@@ -152,6 +141,18 @@ function toggleVideo(){
     }else{
         iframe.src = src.replace("autoplay=0","autoplay=1");
     }
+}
+
+// أنيميشن ظهور السطور واحد واحد
+function showMessage(){
+    const lines = document.querySelectorAll("#message p");
+    let delay = 0;
+    lines.forEach(line=>{
+        setTimeout(()=>{
+            line.style.opacity = 1;
+        }, delay);
+        delay += 1000; // كل سطر يظهر بعد 1 ثانية
+    });
 }
 </script>
 
